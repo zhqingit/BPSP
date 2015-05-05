@@ -10,26 +10,17 @@ BPSP calculates the mutual information (MI) of the mismatch pairs identified in 
 A paper describing GIREMI is published at Nature Methods (http://www.nature.com/nmeth/journal/v12/n4/full/nmeth.3314.html).  
 
 
-### System requirement
-
-- Currently GIREMI supports Linux 64bit (Ubuntu, Red Hat, SUSE and others) system. 
-- At least 8 GB of memory is required to process typical human data sets.
-
 ### Dependent libraries or software
 
-- HTSlib(https://github.com/samtools/htslib) : for accessing SAM/BAM files
-Please make sure your dynamic library path in your configuration file includes the directory in which HTSlib is installed.
-- samtools(http://samtools.sourceforge.net/) : for generating the faidx index of reference genome sequence
-Please use “samtools faidx” to generate the index before running GIREMI.
-- R(http://www.r-project.org/) : for general linear model training and prediction
+- R(http://www.r-project.org/) : for generating the PPT scores and training data
 
-### Installation
-
-GIREMI was implemented using a combination of R, Perl and C codes.  
 
 ### Quickstart
 
-#### Usage: `giremi [options] in1.bam [in2.bam [...]]`
+#### Step 1: R CMD BATCH --no-save --no-restore '--args dist_polyn=file1 PPTscore=file2' get_ppt_score.r tmp.Rout
+#### 
+-   file1: the counts of ? in background, branch point and PPT regions
+-   file2: PPT scores
 
 ###### NOTE:   
 -  The bam files should contain all final mapped reads in all chromosomes.
