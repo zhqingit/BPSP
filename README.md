@@ -17,17 +17,20 @@ A paper describing GIREMI is published at Nature Methods (http://www.nature.com/
 
 ### Quickstart
 
-#### Step 1: R CMD BATCH --no-save --no-restore '--args dist_polyn=file1 PPTscore=file2' get_ppt_score.r tmp.Rout
+#### Step 1: 
+R CMD BATCH --no-save --no-restore '--args dist_polyn=file1 PPTscore=file2' get_ppt_score.r tmp.Rout
 ##### 
 -   file1: the counts of ? in background, branch point and PPT regions
 -   file2: PPT scores
 
-#### Step 2: R CMD BATCH --no-save --no-restore '--args dist_polyn=file1 train_data=file2' get_ppt_score.r tmp.Rout
+#### Step 2: 
+R CMD BATCH --no-save --no-restore '--args dist_polyn=file1 train_data=file2' get_ppt_score.r tmp.Rout
 #####
 -   file1: the counts of ? in background, branch point and PPT regions
 -   file2: the data set training the MM model
 
-#### Step 3: bpmotif.pl [options]
+#### Step 3: 
+bpmotif.pl [options]
 
 ##### Required:
 -  `--pmotif   FILE   prior motif (energy motif in our paper)`  
