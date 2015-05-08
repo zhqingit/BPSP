@@ -9,23 +9,59 @@ use strict;
 use warnings;
 use Switch;
 use List::Util qw/sum/;
+use Getopt::Long;
+
+
 sub ppt_max;
 sub find_ppt;
 sub score_ppt;
 sub if_ppt;
 ######-------------get all the parameters from files-------- 
-my $fpwm = $ARGV[0];
-my $onlyBP = $ARGV[1];
-my $onlyTNA = $ARGV[2];
-my $nbp = $ARGV[3];
+
+sub print_usage(){
+        print "Progarm: bpsp\n",
+                "Version: 0.0.1 (05/08/2015)\n",
+                "\n",
+                "Usage: bpsp.pl \n",
+                "\n",
+                "Required options:\n",
+                "  --onlyM   INT   1 : only use motif; 0 : use both motif and PPT. [1]\n",
+                "  --nBP     INT   Reported BPs. [3]\n",
+                "  --motif   FILE  motif file\n",
+                "  --intron  FILE  intron file\n",
+                "  --PPT     FILE  PPT score\n",
+                "  --out     FILE  output file\n",
+}
+if ($#ARGV==-1){
+        print_usage();
+        exit;
+}
+
+my ($fpwm,$fseq,$fppt,$fout);
+my $onlyBP = 1;
+my $nbp = 3;
+
+GetOptions(
+        'onlyM=i' => \$onlyBP,
+        'nBP=i' => \$nbp,
+        'motif=s' => \$fpwm,
+        'intron=s' => \$fseq,
+        'PPT=s' => \$fppt,
+        'out=s' => \$fout,
+);
+
+#my $fpwm = $ARGV[0];
+#my $onlyBP = $ARGV[1];
+#my $onlyTNA = $ARGV[2];
+#my $nbp = $ARGV[3];
 
 my @NN= qw(A C G T);
-my $S_BACK = -300;
-my $E_BACK = -287;
-my $S_BP = -34;
-my $E_BP = -21;
-my $S_PPT = -16;
-my $E_PPT = -3;
+#my $S_BACK = -300;
+#my $E_BACK = -287;
+#my $S_BP = -34;
+#my $E_BP = -21;
+#my $S_PPT = -16;
+#my $E_PPT = -3;
 my $L_BP_MOTIF = 7;
 my $L_PPT_MOTIF = 8;
 my $L_PPT = 25;
@@ -34,34 +70,30 @@ my $L_WINDOW = 40;
 my $OFFSET = 10;
 my $BP_BASE="TACTAAC";
 my $PPT_BASE="TTTTTTTT";
-
-#my $pwmBP = get_pwmBP("pwmBP_inferred_noppt.txt");
-#my $PPTbaseS=($L_PPT-$L_PPT_MOTIF+1)*$$pptS{$PPT_BASE};
+my $onlyTNA = 0;
 
 
 my @NSS = gene_subseq($L_BP_MOTIF,"max");
-#my $pwmBP = get_pwmBP("src/human/pwmBP1.txt");
-#my $pwmBP = get_pwmBP("src/human/pwmBP_inferred_noppt.txt");
 my $pwmBP = get_pwmBP($fpwm);
 my $bpS = pwmBP2Score(\@NSS,$pwmBP,$BP_BASE);
-my $pptS = get_pptS("out/human/ppt.score.8");
+#my $pptS = get_pptS("out/human/ppt.score.8");
+my $pptS = get_pptS($fppt);
 
-#my $fseq = "aa";
-my $fseq = "src/human/BPS_exp1.txt";
+#my $fseq = "src/human/BPS_exp1.txt";
+open OUT, ">$fout" || die "Can't open the file!";
 open IN, $fseq || die "Can't open the file!";
 while (<IN>){
 	next if (/^#/);
 	chomp;
 	my @line = split /\t/;
-	my $seq = $line[5];
+#my $seq = $line[5];
+	my $seq = $line[1];
 	my $ge = $line[0];
-	#print $ge,"\t",length($seq),"\n";
 	my ($p_bp,$BP,$BP_sc,$PPT_sc,$SC) = get_BPPT_score($seq,$ge);
-#print join("\t",@line[0..4]),"\t","$p_bp\t$BP\t$BP_sc\t$PPT_sc\t$SC\n";
-	print join("\t",@line[0..4]),"\t",join(",",@$p_bp),"\t",join(",",@$BP),"\t",join(",",@$BP_sc),"\t",join(",",@$PPT_sc),"\t",join(",",@$SC),"\n";
-#		"$BP\t$BP_sc\t$PPT_sc\t$SC\n";
+	print OUT join("\t",@line[0..4]),"\t",join(",",@$p_bp),"\t",join(",",@$BP),"\t",join(",",@$BP_sc),"\t",join(",",@$PPT_sc),"\t",join(",",@$SC),"\n";
 }
 close IN;
+close OUT;
 
 sub get_pwmBP{
 	my ($f_pwmBP) = @_;

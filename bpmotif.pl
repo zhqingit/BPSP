@@ -27,7 +27,7 @@ sub print_usage(){
 	print "Progarm: bpmotif\n",
 		"Version: 0.0.1 (05/02/2015)\n",
 		"\n",
-		"Usage: bpmotif.pl -pmotif -motif -bpolyn\n",
+		"Usage: bpmotif.pl \n",
 		"\n",
 		"Required options:\n",
 		"  --pmotif  FILE  prior motif file\n",
