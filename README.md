@@ -82,7 +82,7 @@ Here, the BPS region is defined as the 21-34 nucleotides (nt) upstream of the 3S
 ##### Format of the output file:
 
 - column 1 : The id of the intron 
-- column 2 : The predicted branch point positions relative to the 3"'" splicing site (multiple sites are separated by ",")
+- column 2 : The predicted branch point positions relative to the 3 pair end splicing site (multiple sites are separated by ",")
 - column 3 : The predicted branch point sequences (multiple sites are separated by ",")
 - column 4 : The scores of the predicted branch point sequences based on the BPS motif (multiple sites are separated by ",")
 - column 5 : The scores of the PPTs fowllowing the predicted branch point sequences (multiple sites are separated by ",")
