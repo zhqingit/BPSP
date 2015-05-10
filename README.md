@@ -19,14 +19,14 @@ A paper describing BPSP is under review.
 #### Step 1: 
 R CMD BATCH --no-save --no-restore '--args dist_polyn=fin PPTscore=fout' get_ppt_score.r tmp.Rout
 ##### 
--  `--dist_polyn:  input file with the counts of octanucleotide in background, branch point and PPT regions`
--  `--PPTscore: output file with PPT scores`
+-  `--dist_polyn: FILE  input file with the counts of octanucleotide in background, branch point and PPT regions`
+-  `--PPTscore:   FILE  output file with PPT scores`
 
 #### Step 2: 
 R CMD BATCH --no-save --no-restore '--args dist_polyn=fin train_data=fout' get_train_data.r tmp.Rout
 #####
--  `--dist_polyn:  input the counts of  heptanucleotide in background, branch point and PPT regions`
--  `--train_data: output file with the data set training the MM model`
+-  `--dist_polyn:  FILE input the counts of  heptanucleotide in background, branch point and PPT regions`
+-  `--train_data:  FILE output file with the data set training the MM model`
 
 #### Step 3: 
 bpmotif.pl [options]
@@ -41,10 +41,10 @@ bpsp.pl [options]
 
 ##### Required:
 -  `--onlyM   INT   1 : only use motif; 0 : use both motif and PPT. [1]`
--  `--nBP     INT   Reported BPs. [3]`
--  `--motif   FILE  motif file`
+-  `--nBP     INT   reported mumber of BPs. [3]`
+-  `--motif   FILE  motif file (inferred from last step)`
 -  `--intron  FILE  intron file`
--  `--PPT     FILE  PPT score`
+-  `--PPT     FILE  PPT score (inferred from step 1)`
 -  `--out     FILE  output file`
 
 
@@ -59,15 +59,25 @@ bpsp.pl [options]
 ###### NOTE:
 Here, the BPS region is defined as the 21-34 nucleotides (nt) upstream of the 3SS where most branchpoints are located. We also define the PPT region as the 4-15 nt upstream of the 3SS; and the background region as the 187-200 nt upstream of 3SS because no general splice element is reported for this region. Noticeably, these regions are only relatively enriched or devoid of corresponding signals, and their contrast will provide a statistical clue on what the true signal looks like.
 
-##### Required format of the file containing the list of SNVs (-l option):
+##### Required format of the dist_polyn file:
 
-- column 1 : The name of the chromosome or scaffold   
-- column 2 : The starting position of the SNV in the chromosome or scaffold (0-based)   
-- column 3 : The ending position of the SNV in the chromosome or scaffold (1-based)   
-- column 4 : The name of the gene harboring this SNV; “Inte”: the SNV resides in the Intergenic region   
-- column 5 : A flag, 1: the SNV belongs to dbSNP; 0: otherwise   
-- column 6 : Strand (+ or -); “#” for “Inte” gene  
+- column 1 : The name of the heptanucleotide/octanucleotide 
+- column 2 : The numbers in the background region   
+- column 3 : The numbers in the BPS region   
+- column 4 : The numbers in the PPT region   
 
+##### Required format of the prior motif file:
+
+- column 1 : The name of the position 
+- column 2 : The frequencies of A in all positions 
+- column 3 : The frequencies of C in all positions 
+- column 4 : The frequencies of G in all positions 
+- column 5 : The frequencies of T in all positions 
+
+##### Required format of the intron file:
+
+- column 1 : The id of the intron 
+- column 2 : The sequence of the intron 
 
 ##### Format of the output file:
 
