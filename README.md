@@ -87,3 +87,10 @@ Here, the BPS region is defined as the 21-34 nucleotides (nt) upstream of the 3S
 - column 4 : The scores of the predicted branch point sequences based on the BPS motif (multiple sites are separated by ",")
 - column 5 : The scores of the PPTs fowllowing the predicted branch point sequences (multiple sites are separated by ",")
 - column 6 : The scores of the BPS and PPTs (multiple sites are separated by ",")
+
+#### Examples:
+
+1. R CMD BATCH --no-save --no-restore '--args dist_polyn="example/dist_polyn_8" PPTscore="example/ppt.score.8"' get_ppt_score.r tmp.Rout
+2. R CMD BATCH --no-save --no-restore '--args dist_polyn="example/dist_polyn_7" train_data="example/bp.polyn"' get_train_data.r tmp.Rout
+3. bpmotif.pl --pmotif example/energy_motifBP --motif example/motifBP --bpolyn example/bp.polyn
+4. bpsp.pl --motif example/motifBP --intron example/intron_example --PPT example/ppt.score.8 --out example/res

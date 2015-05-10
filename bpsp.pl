@@ -38,7 +38,7 @@ if ($#ARGV==-1){
 }
 
 my ($fpwm,$fseq,$fppt,$fout);
-my $onlyBP = 1;
+my $onlyBP = 0;
 my $nbp = 3;
 
 GetOptions(
@@ -90,7 +90,8 @@ while (<IN>){
 	my $seq = $line[1];
 	my $ge = $line[0];
 	my ($p_bp,$BP,$BP_sc,$PPT_sc,$SC) = get_BPPT_score($seq,$ge);
-	print OUT join("\t",@line[0..4]),"\t",join(",",@$p_bp),"\t",join(",",@$BP),"\t",join(",",@$BP_sc),"\t",join(",",@$PPT_sc),"\t",join(",",@$SC),"\n";
+#print OUT join("\t",@line[0..4]),"\t",join(",",@$p_bp),"\t",join(",",@$BP),"\t",join(",",@$BP_sc),"\t",join(",",@$PPT_sc),"\t",join(",",@$SC),"\n";
+	print OUT $ge,"\t",join(",",@$p_bp),"\t",join(",",@$BP),"\t",join(",",@$BP_sc),"\t",join(",",@$PPT_sc),"\t",join(",",@$SC),"\n";
 }
 close IN;
 close OUT;
