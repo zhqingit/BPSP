@@ -7,7 +7,7 @@ BPSP predicts the branch point sequence by integrating the degenerative motif of
 
 ### Detailed information on GIREMI and citation
 
-A paper describing GIREMI is published at Nature Methods (http://www.nature.com/nmeth/journal/v12/n4/full/nmeth.3314.html).  
+A paper describing BPSP is under review.  
 
 
 ### Dependent libraries or software
@@ -41,7 +41,8 @@ bpmotif.pl [options]
 -  `-p, --paired-end   INT    1:paired-end RNA-Seq reads; 0:single-end [default: 1]`   
 -  `-s, --strand       INT    0:non-strand specific RNA-Seq; 1: strand-specific RNA-Seq and read 1 (first read for the paired-end reads) is sense to RNA; 2: strand-specific RNA-Seq and read 1 is anti-sense to RNA [default: 0]`
 
-In this paper, the BPS region is defined as the 21-34 nucleotides (nt) upstream of the 3SS where most branchpoints are located[27]. We also define the PPT region as the 4-15 nt upstream of the 3SS; and the background region as the 187-200 nt upstream of 3SS because no general splice element is reported for this region. Noticeably, these regions are only relatively enriched or devoid of corresponding signals, and their contrast will provide a statistical clue on what the true signal looks like.
+##### NOTE:
+Here, the BPS region is defined as the 21-34 nucleotides (nt) upstream of the 3SS where most branchpoints are located. We also define the PPT region as the 4-15 nt upstream of the 3SS; and the background region as the 187-200 nt upstream of 3SS because no general splice element is reported for this region. Noticeably, these regions are only relatively enriched or devoid of corresponding signals, and their contrast will provide a statistical clue on what the true signal looks like.
 
 ##### Required format of the file containing the list of SNVs (-l option):
 
