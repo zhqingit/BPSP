@@ -19,14 +19,14 @@ A paper describing BPSP is under review.
 #### Step 1: 
 R CMD BATCH --no-save --no-restore '--args dist_polyn=fin PPTscore=fout' get_ppt_score.r tmp.Rout
 ##### 
--   fin:  input file with the counts of octanucleotide in background, branch point and PPT regions
--   fout: output file with PPT scores
+-  `--dist_polyn:  input file with the counts of octanucleotide in background, branch point and PPT regions`
+-  `--PPTscore: output file with PPT scores`
 
 #### Step 2: 
 R CMD BATCH --no-save --no-restore '--args dist_polyn=fin train_data=fout' get_train_data.r tmp.Rout
 #####
--   fin:  input the counts of  heptanucleotide in background, branch point and PPT regions
--   fout: output file with the data set training the MM model
+-  `--dist_polyn:  input the counts of  heptanucleotide in background, branch point and PPT regions`
+-  `--train_data: output file with the data set training the MM model`
 
 #### Step 3: 
 bpmotif.pl [options]
