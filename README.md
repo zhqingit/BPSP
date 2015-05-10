@@ -40,12 +40,12 @@ bpmotif.pl [options]
 bpsp.pl [options]
 
 ##### Required:
--  '--onlyM   INT   1 : only use motif; 0 : use both motif and PPT. [1]'
--  '--nBP     INT   Reported BPs. [3]'
--  '--motif   FILE  motif file'
--  '--intron  FILE  intron file'
--  '--PPT     FILE  PPT score'
--  '--out     FILE  output file'
+-  `--onlyM   INT   1 : only use motif; 0 : use both motif and PPT. [1]`
+-  `--nBP     INT   Reported BPs. [3]`
+-  `--motif   FILE  motif file`
+-  `--intron  FILE  intron file`
+-  `--PPT     FILE  PPT score`
+-  `--out     FILE  output file`
 
 
 
