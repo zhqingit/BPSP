@@ -36,12 +36,27 @@ bpmotif.pl [options]
 -  `--motif    FILE   inferred motif`  
 -  `--bpolyn   FILE   training data from step 2`  
 
+#### Step 3: 
+bpsp.pl [options]
+
+##### Required:
+-  '--onlyM   INT   1 : only use motif; 0 : use both motif and PPT. [1]'
+-  '--nBP     INT   Reported BPs. [3]'
+-  '--motif   FILE  motif file'
+-  '--intron  FILE  intron file'
+-  '--PPT     FILE  PPT score'
+-  '--out     FILE  output file'
+
+
+
+##### Required:
+
 ##### Options:
 -  `-m, --min          INT    minimal number of total reads covering candidate editing sites  [default: 5]`   
 -  `-p, --paired-end   INT    1:paired-end RNA-Seq reads; 0:single-end [default: 1]`   
 -  `-s, --strand       INT    0:non-strand specific RNA-Seq; 1: strand-specific RNA-Seq and read 1 (first read for the paired-end reads) is sense to RNA; 2: strand-specific RNA-Seq and read 1 is anti-sense to RNA [default: 0]`
 
-##### NOTE:
+###### NOTE:
 Here, the BPS region is defined as the 21-34 nucleotides (nt) upstream of the 3SS where most branchpoints are located. We also define the PPT region as the 4-15 nt upstream of the 3SS; and the background region as the 187-200 nt upstream of 3SS because no general splice element is reported for this region. Noticeably, these regions are only relatively enriched or devoid of corresponding signals, and their contrast will provide a statistical clue on what the true signal looks like.
 
 ##### Required format of the file containing the list of SNVs (-l option):
